@@ -8,35 +8,36 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ActivityIndicator,
   ProgressBarAndroid,
   ProgressViewIOS,
   View,
   Text,
   Button,
-  LogBox,
   Dimensions,
   Alert,
   Platform,
 } from 'react-native';
 
-const onButtonPress = () => {
-  var time = new Date().toLocaleTimeString
-  Alert.alert(time + `button pressed`);
-  // console.log(`${new Date().toLocaleTimeString} button `)
+function onButtonPress() {
+  Alert.alert(`button pressed`);
 }
 
 const {screenHeight, screenWidth} = Dimensions.get("window")
 
 export default function App(){
   return (
-    <View style = {{padding : 50}}>
-      <ActivityIndicator color = "#000" size = "large"/>
+    <View style = {{padding : 20}}>
+      {Platform.OS === "android" && 
+      <ProgressBarAndroid 
+      styleAttr = "Horizontal"
+      indeterminate = {true}
+      color ="blue"/>
+      }
+      {Platform.OS === "ios" && <ProgressViewIOS progress = {0.4}/>}
       <Text>
           Restaurant reviews!
       </Text>
-      <Text>
+      <Text color >
           Height : {screenHeight}
       </Text>
       <Text>
@@ -45,7 +46,7 @@ export default function App(){
       <Text>
           Platform : {Platform.OS}
       </Text>
-      <Button width = "screenWidth" color = "#f99093" title = "Click me !" onPress = {onButtonPress}/>
+      <Button color = "#f99093" title = "Click me !" onPress = {onButtonPress}/>
     </View>
   );
 };
