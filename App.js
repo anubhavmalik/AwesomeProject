@@ -8,14 +8,10 @@
 
 import React from 'react';
 import {
-  ProgressBarAndroid,
-  ProgressViewIOS,
+  StyleSheet,
+  Dimensions,
   View,
   Text,
-  Button,
-  Dimensions,
-  Alert,
-  Platform,
 } from 'react-native';
 
 function onButtonPress() {
@@ -26,27 +22,31 @@ const {screenHeight, screenWidth} = Dimensions.get("window")
 
 export default function App(){
   return (
-    <View style = {{padding : 20}}>
-      {Platform.OS === "android" && 
-      <ProgressBarAndroid 
-      styleAttr = "Horizontal"
-      indeterminate = {true}
-      color ="blue"/>
-      }
-      {Platform.OS === "ios" && <ProgressViewIOS progress = {0.4}/>}
-      <Text>
-          Restaurant reviews!
-      </Text>
-      <Text color >
-          Height : {screenHeight}
-      </Text>
-      <Text>
-          Width : {screenWidth}
-      </Text>
-      <Text>
-          Platform : {Platform.OS}
-      </Text>
-      <Button color = "#f99093" title = "Click me !" onPress = {onButtonPress}/>
+    <View style = {{padding : 20}, styles.page}>
+      <Text style = {styles.text}>Red</Text>
+      <Text style = {styles.text}>Blue</Text>
+      <Text style = {styles.text}>Green</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "space-around",
+    marginTop: 16
+  },
+  text: {
+    marginTop: 8,
+    fontSize: 16,
+    color: "black",
+    alignContent: "center"
+  },
+  selectedText: {
+    marginTop: 8,
+    fontSize: 16,
+    color: "blue",
+    alignContent: "center"
+  }
+})
