@@ -12,29 +12,50 @@ import {
   Dimensions,
   View,
   Text,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Alert,
 } from 'react-native';
 
-function onButtonPress() {
-  Alert.alert(`button pressed`);
-}
+import puppyImage from "./assets/puppy.jpg"
 
-const {screenHeight, screenWidth} = Dimensions.get("window")
+const {screenWidth, screenHeight} = Dimensions.get("window")
+
+function showWidth(){
+  return Dimensions.get("window").width
+}
 
 export default function App(){
   return (
-    <View style = {{padding : 20}, styles.page}>
-      <Text style = {styles.text}>Red</Text>
-      <Text style = {styles.text}>Blue</Text>
-      <Text style = {styles.text}>Green</Text>
+    <SafeAreaView>
+      <ScrollView>
+        <View style = {{padding: 20}, styles.page}>
+      <Image width = {Dimensions.get("window").width} style = {styles.image} source = {puppyImage}/>
+      <Text 
+      // onPress = {
+      //   Alert.alert(`${showWidth()} is the width`)
+      //   }
+        >Hey this is a puppy</Text>
+      <Image style = {styles.image} source = {puppyImage}/>
+      <Text>Hey this is another puppy image</Text>
     </View>
+      </ScrollView>
+    </SafeAreaView>
+    
+
+
+    // <View style = {{padding : 20}, styles.page}>
+    //   <Text style = {styles.text}>Red</Text>
+    //   <Text style = {styles.text}>Blue</Text>
+    //   <Text style = {styles.text}>Green</Text>
+    // </View>
   );
 };
 
 const styles = StyleSheet.create({
   page: {
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "space-around",
+    flex: 1,
     marginTop: 16
   },
   text: {
@@ -48,5 +69,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "blue",
     alignContent: "center"
+  },
+  image: {
+    marginTop: 16,
+    borderRadius: 16,
   }
 })
