@@ -15,9 +15,10 @@ import {
   SafeAreaView,
   Button,
   TextInput,
+  TextInputComponent,
 } from 'react-native';
 
-export default class MyComponent extends Component {
+export class MyComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -56,20 +57,20 @@ export default class MyComponent extends Component {
   };
 
   render() {
-    const [backgroundColor, setBackgroundColor] = useState('white');
+    // const [backgroundColor, setBackgroundColor] = useState('white');
 
     return (
-      <View style={({padding: 20}, styles.page, {backgroundColor})}>
-        <Text style={styles.text} onPress={() => setBackgroundColor('green')}>
+      <View style={({padding: 20}, styles.page)}>
+        {/* <Text style={styles.text} onPress={() => setBackgroundColor('green')}>
           Green
         </Text>
         <Text
           style={styles.selectedText}
           onPress={() => setBackgroundColor('blue')}>
           Blue
-        </Text>
+        </Text> */}
         <TextInput
-          style={styles.text}
+          style={styles.half}
           placeholder="Please enter expected dice roll number here (till 6)"
           keyboardType="number-pad"
           maxLength={1}
@@ -77,11 +78,7 @@ export default class MyComponent extends Component {
         />
         <View>
           {this.state.canEquate && (
-            <Button
-              style={styles.text}
-              title="Roll dice"
-              onPress={this.rollDice}
-            />
+            <Button title="Roll dice" onPress={this.rollDice} />
           )}
         </View>
       </View>
@@ -119,5 +116,10 @@ const styles = StyleSheet.create({
   image: {
     marginTop: 16,
     borderRadius: 16,
+  },
+  half: {
+    flex: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

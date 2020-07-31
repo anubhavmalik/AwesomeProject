@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 
 import puppyImage from './assets/puppy.jpg';
-import MyComponent from './UIComponents/MyComponent';
+import {MyComponent} from './UIComponents/MyComponent';
 
 const {screenWidth, screenHeight} = Dimensions.get('window');
 
@@ -32,7 +32,7 @@ export default function App() {
     <SafeAreaView>
       <ScrollView>
         <View style={({padding: 20}, styles.page)}>
-          <MyComponent flex={1} />
+          <MyComponent flex={2} />
           {/* <Image
             width={Dimensions.get('window').width}
             style={styles.image}
