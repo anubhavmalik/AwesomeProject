@@ -19,6 +19,7 @@ import {
   FlatList,
 } from 'react-native';
 
+import {TodoComponent} from './UIComponents/TodoComponent';
 import {TitleComponent} from './UIComponents/TitleComponent';
 // import puppyImage from './assets/puppy.jpg';
 // import {MyComponent} from './UIComponents/MyComponent';
@@ -31,23 +32,28 @@ import {TitleComponent} from './UIComponents/TitleComponent';
 
 export default function App() {
   const [todos, setTodos] = useState([
-    {text: 'Learn react', id: '1'},
-    {text: 'Learn Redux', id: '2'},
-    {text: 'Practice a lot', id: '3'},
+    {text: 'Learn react', key: '1'},
+    {text: 'Learn Redux', key: '2'},
+    {text: 'Practice a lot', key: '3'},
   ]);
 
+  const pressHandler = (key) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.key != key);
+    });
+  };
+
   return (
-    <SafeAreaView>
-      <View style={({padding: 20}, styles.page)}>
-        <TitleComponent />
-        <View style={styles.content}>
-          {/* add todo form */}
-          <View style={styles.list}>
-            <FlatList
-              data={todos}
-              renderItem={({item}) => <Text>{item.text}</Text>}
-            />
-          </View>
+    <SafeAreaView style={({padding: 20}, styles.container)}>
+      <TitleComponent />
+      <View height="100%" style={styles.content}>
+        <View style={styles.list}>
+          <FlatList
+            data={todos}
+            renderItem={({item}) => (
+              <TodoComponent item={item} pressHandler={pressHandler} />
+            )}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -73,5 +79,15 @@ const styles = StyleSheet.create({
   image: {
     marginTop: 16,
     borderRadius: 16,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  content: {
+    padding: 40,
+  },
+  list: {
+    marginTop: 20,
   },
 });
