@@ -21,7 +21,7 @@ import {
 
 import {TodoComponent} from './UIComponents/TodoComponent';
 import {TitleComponent} from './UIComponents/TitleComponent';
-import {TodoAdditionComponent} from './UIComponents/TodoAdditionComponent';
+import TodoAdditionComponent from './UIComponents/TodoAdditionComponent';
 // import puppyImage from './assets/puppy.jpg';
 // import {MyComponent} from './UIComponents/MyComponent';
 
@@ -30,7 +30,7 @@ import {TodoAdditionComponent} from './UIComponents/TodoAdditionComponent';
 // function showWidth() {
 //   return Dimensions.get('window').width;
 // }
-
+let num = 4;
 export default function App() {
   const [todos, setTodos] = useState([
     {text: 'Learn react', key: '1'},
@@ -42,6 +42,16 @@ export default function App() {
     setTodos((prevTodos) => {
       return prevTodos.filter((todo) => todo.key != key);
     });
+  };
+
+  const submitTodo = (input) => {
+    if (input) {
+      setTodos((currentList) => {
+        return [{text: input, key: (num++).toString()}, ...currentList];
+      });
+    } else {
+      Alert.alert('Cannot add empty todo');
+    }
   };
 
   return (
@@ -57,7 +67,7 @@ export default function App() {
           />
         </View>
       </View>
-      <TodoAdditionComponent flex={2} />
+      <TodoAdditionComponent submitTodo={submitTodo} />
     </SafeAreaView>
   );
 }
