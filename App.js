@@ -21,6 +21,7 @@ import {
 
 import {TodoComponent} from './UIComponents/TodoComponent';
 import {TitleComponent} from './UIComponents/TitleComponent';
+import {TodoAdditionComponent} from './UIComponents/TodoAdditionComponent';
 // import puppyImage from './assets/puppy.jpg';
 // import {MyComponent} from './UIComponents/MyComponent';
 
@@ -45,8 +46,8 @@ export default function App() {
 
   return (
     <SafeAreaView style={({padding: 20}, styles.container)}>
-      <TitleComponent />
-      <View height="100%" style={styles.content}>
+      <TitleComponent flex={1} />
+      <View height="100%" flex={5} style={styles.content}>
         <View style={styles.list}>
           <FlatList
             data={todos}
@@ -56,6 +57,7 @@ export default function App() {
           />
         </View>
       </View>
+      <TodoAdditionComponent flex={2} />
     </SafeAreaView>
   );
 }
