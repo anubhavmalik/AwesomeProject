@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -16,53 +16,47 @@ import {
   SafeAreaView,
   ScrollView,
   Alert,
+  FlatList,
 } from 'react-native';
 
-import puppyImage from './assets/puppy.jpg';
-import {MyComponent} from './UIComponents/MyComponent';
+import {TitleComponent} from './UIComponents/TitleComponent';
+// import puppyImage from './assets/puppy.jpg';
+// import {MyComponent} from './UIComponents/MyComponent';
 
-const {screenWidth, screenHeight} = Dimensions.get('window');
+// const {screenWidth, screenHeight} = Dimensions.get('window');
 
-function showWidth() {
-  return Dimensions.get('window').width;
-}
+// function showWidth() {
+//   return Dimensions.get('window').width;
+// }
 
 export default function App() {
+  const [todos, setTodos] = useState([
+    {text: 'Learn react', id: '1'},
+    {text: 'Learn Redux', id: '2'},
+    {text: 'Practice a lot', id: '3'},
+  ]);
+
   return (
     <SafeAreaView>
-      <ScrollView>
-        <View style={({padding: 20}, styles.page)}>
-          <MyComponent flex={2} />
-          {/* <Image
-            width={Dimensions.get('window').width}
-            style={styles.image}
-            source={puppyImage}
-          />
-          <Text
-          // onPress = {
-          //   Alert.alert(`${showWidth()} is the width`)
-          //   }
-          >
-            Hey this is a puppy
-          </Text>
-          <Image style={styles.image} source={puppyImage} />
-          <Text>Hey this is another puppy image</Text> */}
+      <View style={({padding: 20}, styles.page)}>
+        <TitleComponent />
+        <View style={styles.content}>
+          {/* add todo form */}
+          <View style={styles.list}>
+            <FlatList
+              data={todos}
+              renderItem={({item}) => <Text>{item.text}</Text>}
+            />
+          </View>
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
-
-    // <View style = {{padding : 20}, styles.page}>
-    //   <Text style = {styles.text}>Red</Text>
-    //   <Text style = {styles.text}>Blue</Text>
-    //   <Text style = {styles.text}>Green</Text>
-    // </View>
   );
 }
 
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    marginTop: 16,
   },
   text: {
     marginTop: 8,

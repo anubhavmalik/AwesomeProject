@@ -32,7 +32,7 @@ export class MyComponent extends Component {
     let diceValue = Math.random() * 5 + 1;
     let num = parseInt(this.state.num);
     console.log(num);
-    let isCorrectGuess = false;
+    let isCorrectGuess = true;
     let canEquate = false;
     if (!isNaN(num) && (num > 0) & (num < 7)) {
       canEquate = true;
@@ -70,17 +70,23 @@ export class MyComponent extends Component {
           Blue
         </Text> */}
         <TextInput
+          height={60}
           style={styles.half}
           placeholder="Please enter expected dice roll number here (till 6)"
           keyboardType="number-pad"
           maxLength={1}
+          flex={1}
           onChangeText={this.changeText}
         />
         <View>
           {this.state.canEquate && (
-            <Button title="Roll dice" onPress={this.rollDice} />
+            <Button flex={1} title="Roll dice" onPress={this.rollDice} />
           )}
         </View>
+
+        {this.state.isCorrectGuess && (
+          <Text flex={1}>You guessed correct!</Text>
+        )}
       </View>
     );
   }
@@ -92,6 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 16,
+    alignContent: 'center',
   },
   text: {
     fontSize: 30,
