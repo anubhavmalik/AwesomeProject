@@ -1,37 +1,41 @@
-import React, {useState} from 'react';
-import {View, TextInput, Button} from 'react-native';
-import {StyleSheet} from 'react-native';
+import React, {Component} from 'react';
+import {View, TextInput, Button, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {addTodo} from '../src/actions/Todo';
 
-export default function TodoAdditionComponent({submitTodo}) {
-  const [text, setText] = useState('');
-
-  const textChanged = (input) => {
-    setText(input);
+class TodoAdditionComponent extends Component {
+  state = {
+    data: '',
   };
 
-  const submitATodo = () => {
-    submitTodo(text);
-    setText('');
-    //   add from here .... this should not be done in this component. ideally this method should be supplied from outside
-    //     // console.log('yolo');
-  };
-
-  return (
-    <View>
-      {/* issue : cant click on this text -> specific to redmi note 3 so far. Why? */}
-      <TextInput
-        style={styles.inputStyle}
-        placeholder="Enter a new todo"
-        onChangeText={textChanged}
-        value={text}
-        color="black"
-        textContentType="jobTitle"
-      />
-
-      <Button color="purple" title="Add" onPress={submitATodo} />
-    </View>
-  );
+  render() {
+    return (
+      <View flex={1}>
+        <TextInput
+          style={styles.inputStyle}
+          placeholder="Enter a new todo"
+          onChangeText={(data) => this.setState({data})}
+          value={this.state.data}
+          color="black"
+          textContentType="jobTitle"
+        />
+        <Button
+          color="purple"
+          title="Add"
+          onPress={() => this.props.addTodo(this.state.data)}
+        />
+      </View>
+    );
+  }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTodo: (todos) => dispatch(addTodo(todos)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(TodoAdditionComponent);
 
 const styles = StyleSheet.create({
   inputStyle: {

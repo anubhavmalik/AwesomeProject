@@ -1,13 +1,28 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {connect} from 'react-redux';
 
-export function TodoComponent({pressHandler, item}) {
+let yolo;
+
+export function TodoComponent({todo}) {
+  console.log('list item');
+  yolo = todo;
+  console.log(todo);
+
   return (
-    <TouchableOpacity onPress={() => pressHandler(item.key)}>
-      <Text style={styles.item}>{item.text}</Text>
+    <TouchableOpacity onPress={() => this.props.delete(yolo.key)}>
+      <Text style={styles.item}>{}</Text>
     </TouchableOpacity>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    delete: (key) => dispatch(deleteTodo('rishuja bj')),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(TodoComponent);
 
 const styles = StyleSheet.create({
   item: {
